@@ -21,8 +21,9 @@
 class super_simple_app() {
 
   package { 'python-flask': ensure => 'latest', }
+  package { 'gunicorn': ensure => 'latest', }
 
-  file { "/usr/local/bin/cipriansapp.py":
+  file { "/usr/local/bin/super_simple_app.py":
     ensure     => file,
     owner      => root,
     group      => root,
