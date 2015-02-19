@@ -71,9 +71,9 @@ Written using python's unittest framework and:
  - has two tests
    - firs test makes sure that / is returning as expected
    - second test makes sure that /something is returning as expected
- - if the tests are failing puppet will also fail
+ - if the tests are failing puppet will also fail to run
 
-Note: In a production environment this is in no way, shape or form an acceptable way of running tests. 
+Note: In a production environment this is in no way, shape or form an acceptable way of running tests. The tests should be a step in the deployment pipeline, but for this exercise I'm using puppet as a poor man's deployment pipeline 
 
 ### <a name="thetest"></a>Puppet
 I'm using standalone puppet and:
