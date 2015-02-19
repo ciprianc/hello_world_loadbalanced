@@ -4,9 +4,9 @@ box_url  = 'https://vagrantcloud.com/puppetlabs/boxes/ubuntu-14.04-64-nocm'
 domain   = 'local'
 
 nodes = [
-  { :hostname => 'loadbalancer', :ip => '192.168.50.1'},
   { :hostname => 'web-1',        :ip => '192.168.50.10'},
   { :hostname => 'web-2',        :ip => '192.168.50.11'},
+  { :hostname => 'loadbalancer', :ip => '192.168.50.253'},
 ]
 
 Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
@@ -20,6 +20,9 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
         # try to get each node's memory setting, default to 128
         box.vm.provider :virtualbox do |vb|
             vb.memory = node[:ram] ? node[:ram] : 128
+        end
+        if node[:hostname] == 'loadbalancer'
+            box.vm.network "forwarded_port", guest: 80, host: 65080, auto_correct: true
         end
     end
   end
