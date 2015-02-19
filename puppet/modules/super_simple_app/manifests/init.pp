@@ -20,8 +20,8 @@
 
 class super_simple_app() {
 
-  package { 'python-flask': ensure => 'latest', }
-  package { 'gunicorn': ensure => 'latest', }
+  $required_packages = [ 'python-flask', 'gunicorn', 'python-gevent' ]
+  package { $required_packages: ensure => 'latest', }
 
   file { "/usr/local/bin/super_simple_app.py":
     ensure     => file,
