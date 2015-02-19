@@ -32,6 +32,15 @@ class super_simple_app() {
     source     => "puppet:///modules/super_simple_app/super_simple_app.py",
   }
 
+  file { "/usr/local/bin/test_super_simple_app.py":
+    ensure     => file,
+    owner      => root,
+    group      => root,
+    mode       => '0755',
+    require    => Package['python-flask'],
+    source     => "puppet:///modules/super_simple_app/test_super_simple_app.py",
+  }
+
   file { "/etc/init/super_simple_app.conf":
     ensure     => file,
     owner      => root,
@@ -45,6 +54,13 @@ class super_simple_app() {
     ensure     => 'running',
     enable     => true,
     provider   => 'upstart',
+  }
+
+  exec { 'test_super_simple_app.py':
+    cwd        => "/usr/local/bin/",
+    command    => '/usr/local/bin/test_super_simple_app.py',
+    require    => File['/usr/local/bin/test_super_simple_app.py'],
+    returns    => 0
   }
 
 }
