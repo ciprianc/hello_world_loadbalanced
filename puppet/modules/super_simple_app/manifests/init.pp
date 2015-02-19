@@ -39,6 +39,7 @@ class super_simple_app() {
     mode       => '0755',
     require    => Package['python-flask'],
     source     => "puppet:///modules/super_simple_app/test_super_simple_app.py",
+    before     => File['/usr/local/bin/super_simple_app.py']
   }
 
   file { "/etc/init/super_simple_app.conf":
@@ -59,7 +60,7 @@ class super_simple_app() {
   exec { 'test_super_simple_app.py':
     cwd        => "/usr/local/bin/",
     command    => '/usr/local/bin/test_super_simple_app.py',
-    require    => File['/usr/local/bin/test_super_simple_app.py'],
+    require    => File['/usr/local/bin/super_simple_app.py', '/usr/local/bin/test_super_simple_app.py'],
     returns    => 0
   }
 
