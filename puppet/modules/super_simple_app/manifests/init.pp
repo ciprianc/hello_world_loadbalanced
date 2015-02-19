@@ -28,7 +28,23 @@ class super_simple_app() {
     group      => root,
     mode       => '0755',
     require    => Package['python-flask'],
-    source     => "puppet:///modules/super_simple_app/cipriansapp.py",
+    source     => "puppet:///modules/super_simple_app/super_simple_app.py",
   }
+
+  file { "/etc/init/super_simple_app.conf":
+    ensure     => file,
+    owner      => root,
+    group      => root,
+    mode       => '0644',
+    require    => Package['python-flask'],
+    source     => "puppet:///modules/super_simple_app/upstart_super_simple_app.conf",
+  }
+
+  service { "super_simple_app":
+    ensure     => 'running',
+    enable     => true,
+    provider   => 'upstart',
+  }
+
 }
 
