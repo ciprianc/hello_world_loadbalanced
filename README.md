@@ -66,7 +66,7 @@ Very simple app written in python + flask that:
  - puppet also install an upstart script to make it a daemon, then starts the daemon
  - it's unit tested
 
-### <a name="thetest"></a>The unit tests
+### <a name="thetests"></a>The unit tests
 Written using python's unittest framework and:
  - has two tests
    - firs test makes sure that / is returning as expected
@@ -75,7 +75,7 @@ Written using python's unittest framework and:
 
 Note: In a production environment this is in no way, shape or form an acceptable way of running tests. The tests should be a step in the deployment pipeline, but for this exercise I'm using puppet as a poor man's deployment pipeline 
 
-### <a name="thetest"></a>Puppet
+### <a name="thedoll"></a>Puppet
 I'm using standalone puppet and:
  - not using hiera, roles nor profiles as the setup is pretty simple.
  - custom plugin that installs the web app and tests it
