@@ -14,7 +14,7 @@ node loadbalancer {
   }
 }
 
-node web-1 {
+node /web-[0-9]/ {
   include super_simple_app
   include baseconfig
 }
